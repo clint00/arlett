@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta con Efecto de Máquina de Escribir</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black url('stars.jpg') repeat top left;
+      z-index: -1;
+    }
+
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border: 1px solid white;
+      border-radius: 10px;
+      opacity: 0;
+      max-width: 80%;
+      width: 600px;
+      text-align: justify;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    /* Media query para pantallas más pequeñas */
+    @media screen and (max-width: 768px) {
+      .letter {
+        font-size: 25px;
+        width: 90%;
+        max-width: none;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="letter" id="letter">
+    <h1>Querido Amor,</h1>
+    <p id="typed-text"></p>
+  </div>
+
+  <script>
+    const text = "Texto de tu carta de amor..."; // Tu texto de la carta aquí
+    let index = 0;
+    const speed = 50; // Velocidad de escritura en milisegundos
+
+    function typeWriter() {
+      if (index < text.length) {
+        document.getElementById('typed-text').innerText += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    window.onload = function() {
+      setTimeout(() => {
+        document.getElementById('letter').style.opacity = 1;
+        typeWriter();
+      }, 2000); // Retardo de 2 segundos antes de comenzar a escribir
+    };
+  </script>
+</body>
+</html>
